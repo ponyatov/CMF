@@ -22,6 +22,7 @@
         // parser
         "daohong-emilio.yash",
         "rreverser.ragel",
+        "serghei-iakovlev.language-lemon",
         // embedded
         "dan-c-underwood.arm",
         "zixuanwang.linkerscript",
