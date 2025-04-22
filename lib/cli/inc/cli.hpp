@@ -42,20 +42,25 @@ class Object {
     Object();
     Object(string V);
     ~Object();
+    virtual string tag();
     virtual string val();
+    string dump();
 };
 
 class Int : public Object {
     int value;
     public:
     Int(int n);
+    string tag();
     string val();
 };
 
 extern Object *D[Dsz];
-extern size_t Dp;
+extern uint Dp;
 
 extern void push(Object *o);
 extern void push(int n);
+
+extern void quest();
 
 /// @}

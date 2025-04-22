@@ -13,12 +13,15 @@ void yyerror(char* msg) {
 }
 
 Object* D[Dsz];
-size_t Dp = 0;
+uint Dp = 0;
 
 Object::Object() { ref = 0; }
 
+string Object::tag() { return "obj"; }
 string Object::val() { return value; }
+string Object::dump() { return tag() + ':' + val(); }
 
+string Int::tag() { return "int"; }
 Int::Int(int n) : Object() { value = n; }
 
 string Int::val() {
@@ -32,3 +35,9 @@ void push(Object* o) {
     D[Dp++] = o;
 }
 void push(int n) { push(new Int(n)); }
+
+void quest() {
+    cerr << "\n[ ";
+    for (uint i = 0; i < Dp; i++) cerr << D[i]->dump() << ' ';
+    cerr << "]\n'";
+}
