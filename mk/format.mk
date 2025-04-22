@@ -1,7 +1,7 @@
 .PHONY: format
-format: tmp/format_cpp tmp/format_py tmp/format_js
+format: tmp/format_cpp
 
-tmp/format_cpp: $(C) $(H)
+tmp/format_cpp: $(C) $(H) $(RL)
 	$(CF) $? && touch $@
 
 tmp/format_py: $(P)

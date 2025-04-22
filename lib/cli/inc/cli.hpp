@@ -6,6 +6,12 @@
 /// @brief interpret file
 extern void cli(char* filename);
 
+/// @brief interpret string
+extern void cli(char* str);
+
+/// @brief interpret memory buffer
+extern void cli(char* str);
+
 extern char* yyfile;  ///< current file/stream name
 extern int yylineno;  ///< current line number
 extern int yyin;      ///< script file handler

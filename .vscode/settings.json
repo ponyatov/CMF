@@ -48,6 +48,10 @@
         "editor.defaultFormatter" : "xaver.clang-format",
         "editor.formatOnSave"     :  false
     },
+    "[ragel]": {
+        "editor.defaultFormatter" : "xaver.clang-format",
+        "editor.formatOnSave"     :  false
+    },
     // "C_Cpp.intelliSenseEngine": "Tag Parser",
     // "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
 

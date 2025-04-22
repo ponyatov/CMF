@@ -33,3 +33,4 @@ F += $(wildcard lib/*.ini) $(wildcard lib/*.f)
 # Python
 P += $(wildcard src/*.py)
 
+RL += $(wildcard lib/*/src/*.ragel)
