@@ -6,7 +6,7 @@ __attribute__((weak)) int main(int argc, char *argv[]) {
     arg(0, argv[0]);
     for (int i = 1; i < argc; i++) {
         arg(i, argv[i]);
-        cli(argv[i]);
+        clif(argv[i]);
     }
     return 0;
 }

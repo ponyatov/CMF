@@ -1,8 +1,13 @@
+#include "os.hpp"
 #include "cli.hpp"
-#include <string.h>
 
 char* yyfile = nullptr;
 int yylineno = 0;
 int yyin = 0;
 
-void cli(char* str) { cli(str, str + strlen(str)); }
+void clis(char* str) { cli(str, str + strlen(str)); }
+
+void yyerror(char* msg) {
+    fprintf(stderr, "\n\n%s:%i %s\n\n", yyfile, yylineno, msg);
+    exit(-1);
+}

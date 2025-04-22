@@ -1,9 +1,9 @@
 #include "os.hpp"
 #include "cli.hpp"
 
-void cli(char* filename) {
+void clif(char* filename) {
     yyfile = filename;
-    yylineno = 0;
+    yylineno = 1;
     // open
     assert((yyin = open(yyfile, O_RDONLY)));
     // get host memory spec
@@ -12,7 +12,6 @@ void cli(char* filename) {
     // get file size
     struct stat st;
     assert(0 == fstat(yyin, &st));
-    assert(st.st_size);
     char* buf = (char*)mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, yyin, 0);
     assert(buf);
     // parse
