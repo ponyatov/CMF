@@ -1,6 +1,6 @@
-.PHONY : install update ref gz
+.PHONY : install update  ref gz
 install: $(HOST)_install doc ref gz
-update : $(HOST)_update  $(PIP)
+update : $(HOST)_update
 ref    : $(RF)
 gz     : $(GZ)
 
