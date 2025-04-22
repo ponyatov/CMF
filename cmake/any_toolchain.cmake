@@ -26,6 +26,7 @@ string(TOUPPER ${OS}   OS_  )
 
 add_compile_options(
     -Wall -Wextra               # -Wpedantic
+    -Wno-type-limits            # lemon
     -Wno-implicit-fallthrough   # ragel
     -Wno-unused-function        # flex
     -Wno-write-strings          # yacc

@@ -76,17 +76,22 @@ foreach(LEMON_FILE ${M})
     string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.lemon.hpp"
         LEMON_HPP           ${LEMON_FILE})
     list(APPEND HP          ${LEMON_HPP})
+    string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.lemon.out"
+        LEMON_OUT           ${LEMON_FILE})
+    list(APPEND HP          ${LEMON_OUT})
     #
     string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.c"
         LEMON_C             ${LEMON_FILE})
     string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.h"
         LEMON_H             ${LEMON_FILE})
+    string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.out"
+        LEMON_O             ${LEMON_FILE})
     add_custom_command(
         OUTPUT              ${LEMON_C} ${LEMON_H}
         DEPENDS             ${LEMON_FILE}
         WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
         COMMAND             ${LEMON_EXECUTABLE}
-        ARGS                -d${CMAKE_BINARY_DIR} ${LEMON_FILE}
+        ARGS                -l -d${CMAKE_BINARY_DIR} ${LEMON_FILE}
     )
     add_custom_command(
         OUTPUT              ${LEMON_CPP}
@@ -101,5 +106,12 @@ foreach(LEMON_FILE ${M})
         WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
         COMMAND             mv
         ARGS                ${LEMON_H} ${LEMON_HPP}
+    )
+    add_custom_command(
+        OUTPUT              ${LEMON_OUT}
+        DEPENDS             ${LEMON_O}
+        WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
+        COMMAND             mv
+        ARGS                ${LEMON_O} ${LEMON_OUT}
     )
 endforeach()
