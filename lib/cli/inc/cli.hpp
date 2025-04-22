@@ -28,10 +28,6 @@ extern int bin(char *ts, char *te);    ///< binary
 extern float num(char *ts, char *te);  ///< floating point
 /// @}
 
-#include <string>
-
-using namespace std;
-
 #define Dsz 0x10
 
 class Object {

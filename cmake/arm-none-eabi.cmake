@@ -10,7 +10,7 @@ add_compile_options(
     -mthumb
     -ffunction-sections -fdata-sections
     -DCORTEX -D${SERIES}
-    # $<$<COMPILE_LANGUAGE:CXX>:-nostdinc++>
+    $<$<COMPILE_LANGUAGE:CXX>:-nostdinc++>
     $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
     $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
     $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>
