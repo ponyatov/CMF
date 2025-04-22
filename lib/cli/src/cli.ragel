@@ -32,7 +32,8 @@ void cli(char* p, char* pe) {
         nl+     => { yylineno += te-ts; /* count line  */ };
         sp      => {                    /* drop spaces */ };
 
-        dec     => { printf("\t%i: int:%i\n",yylineno,atoi(strndup(ts,te-ts))); };
+        dec     => { printf("\t%i: int:%i\n",yylineno,dec(ts,te)); };
+
         cmd     => { printf("\t%i: cmd:%s\n",yylineno,strndup(ts,te-ts)); };
         id      => { printf("\t%i:  id:%s\n",yylineno,strndup(ts,te-ts)); };
 
