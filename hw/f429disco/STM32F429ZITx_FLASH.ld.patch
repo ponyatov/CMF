@@ -1,0 +1,66 @@
+--- STM32F429ZITx_FLASH.ld	2025-04-22 18:08:47.723253695 +0400
++++ STM32F429ZITx_FLASH.ld.fix	2025-04-22 18:10:15.415253924 +0400
+@@ -53,17 +53,17 @@
+ ENTRY(Reset_Handler)
+ 
+ /* Highest address of the user mode stack */
+-_estack = ORIGIN() + LENGTH();    /* end of RAM */
++_estack = ORIGIN(CCMRAM) + LENGTH(CCMRAM);      /* end of RAM */
+ /* Generate a link error if heap and stack don't fit into RAM */
+-_Min_Heap_Size = 0x200;      /* required amount of heap  */
+-_Min_Stack_Size = 0x400; /* required amount of stack */
++_Min_Heap_Size  = 0x200;          /* required amount of heap  */
++_Min_Stack_Size = 0x400;          /* required amount of stack */
+ 
+ /* Specify the memory areas */
+ MEMORY
+ {
+-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 192K
+-CCMRAM (xrw)      : ORIGIN = 0x10000000, LENGTH = 64K
+-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 2048K
++FLASH  (rx)       : ORIGIN =  0x8000000, LENGTH = 2048K
++RAM    (xrw)      : ORIGIN = 0x20000000, LENGTH =  192K
++CCMRAM (xrw)      : ORIGIN = 0x10000000, LENGTH =   64K
+ }
+ 
+ /* Define output sections */
+@@ -144,7 +144,7 @@
+ 
+     . = ALIGN(4);
+     _edata = .;        /* define a global symbol at data end */
+-  } > AT> FLASH
++  } >RAM AT> FLASH
+ 
+   _siccmram = LOADADDR(.ccmram);
+ 
+@@ -180,7 +180,7 @@
+     . = ALIGN(4);
+     _ebss = .;         /* define a global symbol at bss end */
+     __bss_end__ = _ebss;
+-  } >
++  } >RAM
+ 
+   /* User_heap_stack section, used to check that there is enough RAM left */
+   ._user_heap_stack :
+@@ -191,18 +191,13 @@
+     . = . + _Min_Heap_Size;
+     . = . + _Min_Stack_Size;
+     . = ALIGN(8);
+-  } >
+-
+-  
++  } >RAM
+ 
+   /* Remove information from the standard libraries */
+   /DISCARD/ :
+   {
+-    libc.a ( * )
+-    libm.a ( * )
++    libc.a   ( * )
++    libm.a   ( * )
+     libgcc.a ( * )
+   }
+-
+ }
+-
+-
