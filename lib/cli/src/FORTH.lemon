@@ -3,8 +3,7 @@
     #include "cli.hpp"
 }
 
-// with some infix modifications
-%name FORTH
+%name         F_
 %token_prefix F_
 
 syntax ::= .
