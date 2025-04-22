@@ -1,0 +1,10 @@
+%include {
+    #include "os.hpp"
+    #include "cli.hpp"
+}
+
+// with some infix modifications
+%name FORTH
+%token_prefix F_
+
+syntax ::= .

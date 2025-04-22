@@ -69,15 +69,37 @@ foreach(RAGEL_FILE ${R})
     )
 endforeach()
 
-foreach(LEMON_FILE ${R})
+foreach(LEMON_FILE ${M})
     string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.lemon.cpp"
-        RAGEL_CPP           ${LEMON_FILE})
-    list(APPEND CP          ${RAGEL_CPP})
+        LEMON_CPP           ${LEMON_FILE})
+    list(APPEND CP          ${LEMON_CPP})
+    string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.lemon.hpp"
+        LEMON_HPP           ${LEMON_FILE})
+    list(APPEND HP          ${LEMON_HPP})
+    #
+    string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.c"
+        LEMON_C             ${LEMON_FILE})
+    string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.h"
+        LEMON_H             ${LEMON_FILE})
     add_custom_command(
-        OUTPUT              ${RAGEL_CPP}
+        OUTPUT              ${LEMON_C} ${LEMON_H}
         DEPENDS             ${LEMON_FILE}
         WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
-        COMMAND             ${RAGEL_EXECUTABLE}
-        ARGS                -C -G2 -o ${RAGEL_CPP} ${LEMON_FILE}
+        COMMAND             ${LEMON_EXECUTABLE}
+        ARGS                -d${CMAKE_BINARY_DIR} ${LEMON_FILE}
+    )
+    add_custom_command(
+        OUTPUT              ${LEMON_CPP}
+        DEPENDS             ${LEMON_C}
+        WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
+        COMMAND             mv
+        ARGS                ${LEMON_C} ${LEMON_CPP}
+    )
+    add_custom_command(
+        OUTPUT              ${LEMON_HPP}
+        DEPENDS             ${LEMON_H}
+        WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
+        COMMAND             mv
+        ARGS                ${LEMON_H} ${LEMON_HPP}
     )
 endforeach()
