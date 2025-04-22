@@ -1,0 +1,3 @@
+## cortexM
+CUBEMX_VER   = 6.12.1
+NEWLIB_VER   = 3.3.0
