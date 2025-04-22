@@ -19,12 +19,22 @@ void cli(char* p, char* pe) {
 %%{
     comment = '#' [^\n]*;                   # comment
     nl      = '\n';                         # new line
-    sp      = [ \r\t]+;                     # drop spaces
+    sp      = [ \r\t]+;                     # any spaces
+
+    sign    = [+\-];                        # sign
+    dec     = sign ? digit+;                # decimal int
+
+    cmd     = "nop"|"halt"|".";             # VM command
+    id      = [_a-zA-Z][_a-zA-Z0-9]*;       # variable/name
 
     cli := |*
-        comment => { };
-        nl+     => { yylineno += te-ts; /* count line */ };
-        sp      => { };
+        comment => {                                      };
+        nl+     => { yylineno += te-ts; /* count line  */ };
+        sp      => {                    /* drop spaces */ };
+
+        dec     => { printf("\t%i: int:%i\n",yylineno,atoi(strndup(ts,te-ts))); };
+        cmd     => { printf("\t%i: cmd:%s\n",yylineno,strndup(ts,te-ts)); };
+        id      => { printf("\t%i:  id:%s\n",yylineno,strndup(ts,te-ts)); };
 
         any     => { yyerror(strndup(ts,te-ts)); };
     *|;
