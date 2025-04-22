@@ -34,4 +34,6 @@ F += $(wildcard lib/*.ini) $(wildcard lib/*.f)
 P += $(wildcard src/*.py)
 
 # Ragel
-L += $(wildcard src/*.ragel) $(wildcard lib/*/src/*.ragel)
+R += $(wildcard src/*.ragel) $(wildcard lib/*/src/*.ragel)
+# Lemon
+M += $(wildcard src/*.lemon) $(wildcard lib/*/src/*.lemon)

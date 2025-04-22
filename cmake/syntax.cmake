@@ -1,6 +1,7 @@
 find_package(FLEX  REQUIRED)
 find_package(BISON REQUIRED)
 find_package(RAGEL REQUIRED)
+find_package(LEMON REQUIRED)
 
 file(GLOB L
     RELATIVE ${CMAKE_SOURCE_DIR}
@@ -18,6 +19,12 @@ file(GLOB R
     RELATIVE ${CMAKE_SOURCE_DIR}
     src/*.ragel
     lib/src/*.ragel lib/*/src/*.ragel
+)
+
+file(GLOB M
+    RELATIVE ${CMAKE_SOURCE_DIR}
+    src/*.lemon
+    lib/src/*.lemon lib/*/src/*.lemon
 )
 
 foreach(LEX_FILE ${L})
@@ -59,5 +66,18 @@ foreach(RAGEL_FILE ${R})
         WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
         COMMAND             ${RAGEL_EXECUTABLE}
         ARGS                -C -G2 -o ${RAGEL_CPP} ${RAGEL_FILE}
+    )
+endforeach()
+
+foreach(LEMON_FILE ${R})
+    string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.lemon.cpp"
+        RAGEL_CPP           ${LEMON_FILE})
+    list(APPEND CP          ${RAGEL_CPP})
+    add_custom_command(
+        OUTPUT              ${RAGEL_CPP}
+        DEPENDS             ${LEMON_FILE}
+        WORKING_DIRECTORY   ${CMAKE_SOURCE_DIR}
+        COMMAND             ${RAGEL_EXECUTABLE}
+        ARGS                -C -G2 -o ${RAGEL_CPP} ${LEMON_FILE}
     )
 endforeach()
