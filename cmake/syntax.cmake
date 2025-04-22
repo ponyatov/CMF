@@ -78,7 +78,7 @@ foreach(LEMON_FILE ${M})
     list(APPEND HP          ${LEMON_HPP})
     string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.lemon.out"
         LEMON_OUT           ${LEMON_FILE})
-    list(APPEND HP          ${LEMON_OUT})
+    list(APPEND OP          ${LEMON_OUT})
     #
     string(REGEX REPLACE ".+\/(.+)\.lemon$" "${CMAKE_BINARY_DIR}/\\1.c"
         LEMON_C             ${LEMON_FILE})
