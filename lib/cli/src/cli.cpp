@@ -11,3 +11,8 @@ void yyerror(char* msg) {
     fprintf(stderr, "\n\n%s:%i %s\n\n", yyfile, yylineno, msg);
     exit(-1);
 }
+
+Object* D[Dsz];
+size_t Dp = 0;
+
+void push(int n) { push(new Int(n)); }

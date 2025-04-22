@@ -28,4 +28,31 @@ extern int bin(char *ts, char *te);    ///< binary
 extern float num(char *ts, char *te);  ///< floating point
 /// @}
 
+#include <string>
+
+using namespace std;
+
+#define Dsz 0x10
+
+class Object {
+    string value;
+    size_t ref;
+
+   public:
+    Object();
+    Object(string V);
+    ~Object();
+};
+
+class Int : public Object {
+    int value;
+    public:
+    Int(int n);
+};
+
+extern Object *D[Dsz];
+extern size_t Dp;
+
+extern void push(int n);
+
 /// @}
