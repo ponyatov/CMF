@@ -7,6 +7,10 @@
 #include <assert.h>
 #include <string.h>
 
+#include <sstream>
+
+using namespace std;
+
 #ifdef LINUX
 #include "linux.hpp"
 #endif

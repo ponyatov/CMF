@@ -42,17 +42,20 @@ class Object {
     Object();
     Object(string V);
     ~Object();
+    virtual string val();
 };
 
 class Int : public Object {
     int value;
     public:
     Int(int n);
+    string val();
 };
 
 extern Object *D[Dsz];
 extern size_t Dp;
 
+extern void push(Object *o);
 extern void push(int n);
 
 /// @}

@@ -15,4 +15,20 @@ void yyerror(char* msg) {
 Object* D[Dsz];
 size_t Dp = 0;
 
+Object::Object() { ref = 0; }
+
+string Object::val() { return value; }
+
+Int::Int(int n) : Object() { value = n; }
+
+string Int::val() {
+    ostringstream os;
+    os << value;
+    return os.str();
+}
+
+void push(Object* o) {
+    assert(Dp < Dsz);
+    D[Dp++] = o;
+}
 void push(int n) { push(new Int(n)); }
